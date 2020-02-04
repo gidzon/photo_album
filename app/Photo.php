@@ -7,6 +7,7 @@ namespace app;
 class Photo
 {
     private $fileName;
+    private $status;
 
     public function uploadFile($fileName, $tmp, string $path)
     {
@@ -25,9 +26,10 @@ class Photo
     public function addBdPhoto($pdo, $name, string $file, $date)
     {
         $this->fileName = $name;
-        $sql = "INSERT INTO photo (name, path, date)  VALUES (?, ?, ?)";
+        $this->status = 0;
+        $sql = "INSERT INTO photo (name, path, date, status)  VALUES (?, ?, ?, ?)";
         $query = $pdo->prepare($sql);
-        $query->execute([$this->fileName, $file, $date]);
+        $query->execute([$this->fileName, $file, $date, $this->status]);
     }
 
     public  function getInfoPhoto($pdo, $id)
