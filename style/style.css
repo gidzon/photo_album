@@ -8,7 +8,7 @@ header{
   width: 100%;
   height: 100%;
     border: 1px solid gray;
-    height: 250px;
+    height: 215px;
     background-color: burlywood;
 }
 
@@ -18,15 +18,36 @@ header{
     position: relative;
 }
 
+a{
+    text-decoration: none;
+    color: darkseagreen;
+}
+
 header a{
     border-radius: 10px;
-    text-decoration: none;
+
 
 }
 
- .buttonHead{
+.buttonHead a{
+    display: block;
     float: right;
+    position: relative; right: 100px; bottom: 50px;
+    border: 2px solid cadetblue;
+    background-color: blanchedalmond;
+    padding: 5px;
+    margin: 4px;
+
 }
+
+/* .buttonHead{*/
+/*float: right;*/
+/*position: relative; right: 20px; top: 150px;*/
+/*padding: 10px;*/
+/*margin: 10px;*/
+
+
+/*}*/
 
 .main-content{
 position: absolute;
