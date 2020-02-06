@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body{
+    background-color: blanchedalmond;
+}
+
 header{
   position: fixed;
   width: 100%;
@@ -40,21 +44,25 @@ header a{
 
 }
 
-/* .buttonHead{*/
-/*float: right;*/
-/*position: relative; right: 20px; top: 150px;*/
-/*padding: 10px;*/
-/*margin: 10px;*/
-
-
-/*}*/
-
 .main-content{
-position: absolute;
-    left: 100px;
-    top: 300px;
+position: relative;  left: 100px; top: 300px;
+border: 2px solid lightslategray;
+    border-radius: 5px;
+    margin: 10px 10px;
+    float: left;
 }
 
 .content{
+float: left;
 
+    padding: 10px;
+
+}
+
+.content img{
+    border-radius: 10px;
+}
+
+.content p{
+    position: relative; left: 100px;
 }
