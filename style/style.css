@@ -64,6 +64,7 @@ float: left;
 
 .content img{
     border-radius: 10px;
+    width: auto;
 }
 
 .content p{
