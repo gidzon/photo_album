@@ -6,30 +6,38 @@ namespace app;
 
 class User
 {
-    private $login;
-    private $pass;
-    private $name;
-    private $surname;
-    private $nickname = null;
-    private $hash;
-    private $status;
+    protected $pdo;
+    protected $login;
+    protected $pass;
+    protected $name;
+    protected $surname;
+    protected $hash;
+    protected $status;
 
-    public function regUser($pdo, $login, $pass, $name, $surname, $nickname, $status)
+    public function __construct($pdo, $login = null, $pass = null, 
+    $name = null, $surname = null,  $status = null) 
     {
-        $this->name = $name;
+        $this->pdo = $pdo;
         $this->login = $login;
         $this->pass = $pass;
+        $this->name = $name;
         $this->surname = $surname;
-        $this->nickname = $nickname;
         $this->status = $status;
-        $this->hash = password_hash($this->pass, PASSWORD_DEFAULT);
-
-        $sql = "INSERT INTO user (login, password, name, surname, nickname, status) VALUES (?, ?, ?, ?, ?, ?)";
-        $stn = $pdo->prepare($sql);
-        $stn->execute([$this->login, $this->hash, $this->name, $this->surname, $this->nickname, $this->status]);
     }
 
-    public function authUser($pdo, $login, $pass)
+    public function regUser()
+    {
+        
+        $this->hash = password_hash($this->pass, PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO user (login, password, name, surname,  status) 
+        VALUES (?, ?, ?, ?, ?)";
+        $stn = $pdo->prepare($sql);
+        $stn->execute([$this->login, $this->hash, $this->name, 
+        $this->surname,  $this->status]);
+    }
+
+    public function authUser()
     {
 
 
@@ -38,17 +46,15 @@ class User
         $stn->exexute([$this->login]);
         $result = $stn->fetch();
 
-        $this->login = $login;
-        $this->pass = $pass;
         $this->hash = $result['password'];
         $this->status = $result['status'];
 
 
         if ($this->login == $result['login'] and password_verify($this->pass, $this->hash)) {
-            if ($this->status == 'user')
-            setcookie('auth', 'user', time()+60*60*24*30, '/');
-                elseif ($this->status == 'admin')
-                    setcookie('auth', 'admin', time()+60*60*24*30, '/');
+            if ($this->status == '1')
+                setcookie('auth', 'user', time()+60*60*24*30, '/');
+                    elseif ($this->status == '10')
+                        setcookie('auth', 'admin', time()+60*60*24*30, '/');
         }
     }
 
@@ -59,7 +65,7 @@ class User
         $stn->execute([$id]);
     }
 
-    public function updateUser($pdo, $id, $login = null, $pass = null)
+    public function updateUser($pdo, $id, $login, $pass)
     {
         $this->login = $login;
         $this->pass = password_hash($pass, PASSWORD_DEFAULT);
@@ -73,5 +79,21 @@ class User
             $stn = $pdo->prepare($sql);
             $stn->execute([$this->login, $id]);
         }
+    }
+
+    public function getUser($id)
+    {
+        $sql = "SELECT name, surname FROM user WHERE id = ?";
+        $query = $pdo->prepare($sql);
+        $query->execute([$id]);
+        $result = $query->fetch(PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    public function getUsersInfo()
+    {
+        $sql = "SELECT * FROM user";
+        $result = $pdo->query($sql);
+        return $result;
     }
 }

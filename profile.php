@@ -19,4 +19,5 @@
         <input type="image" src="images/delete.jpg">
     </form>
 </div>
+</body>
 </html>

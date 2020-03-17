@@ -23,7 +23,7 @@ class Photo
         $query->execute([$id]);
     }
 
-    public function addBdPhoto($pdo, $name, string $file, $date)
+    public function addBdPhoto($pdo, $name,  $file, $date)
     {
         $this->fileName = $name;
         $this->status = 0;

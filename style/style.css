@@ -55,15 +55,13 @@ header a{
 
 
 .content{
-float: left;
-
+    float: left;
     padding: 10px;
-
 }
 
 .content img{
     border-radius: 10px;
-    width: auto;
+    max-width: 299px;
 }
 
 .content p{
@@ -103,4 +101,31 @@ float: left;
 .top form input{
     max-width: 120px;
     position: relative; left: 70%;
+}
+
+/* admin */
+
+li{
+    list-style-type: none;
+    
+}
+
+.list{
+    border: 3px solid aliceblue;
+    background-color: aqua;
+    max-width: 30%;
+    border-radius: 20px;
+    padding: 1%;
+    margin: 15px;
+    position: relative;
+}
+
+ul input{
+    margin: 5px 0px 5px 0px;
+}
+
+.admin-photo img{
+    max-width: 50%;
+    position: absolute; left: 40%; top: 27%;
+    border-radius: 10px;
 }
